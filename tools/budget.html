@@ -1,16 +1,52 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>教育预算计算器｜升学路线图</title><link rel="stylesheet" href="../styles.css"></head><body>
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="估算教育项目总费用和应急预留。"><title>教育预算计算器｜升学路线图</title><link rel="stylesheet" href="../styles.css"></head>
+<body>
 <header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">路</span><span>升学路线图</span></a><nav><a href="../index.html#knowledge">知识库</a><a href="index.html">实用工具</a><a href="../sources.html">官方资料库</a></nav><a class="github-link" href="../index.html">返回首页 ↗</a></header>
-<section class="page-hero"><div class="breadcrumb"><a href="../index.html">首页</a> / <a href="index.html">实用工具</a> / 预算计算器</div><p class="eyebrow">EDUCATION BUDGET</p><h1>教育预算计算器</h1><p>填入你自己的估算值，统一计算项目成本。金额按同一币种输入；如需换汇，请另行核实汇率和银行费用。</p></section>
-<div class="form-shell"><form class="tool-form" id="budgetForm"><div class="form-grid">
-<label>币种<select id="currency"><option value="¥">人民币（¥）</option><option value="€">欧元（€）</option><option value="£">英镑（£）</option><option value="$">美元（$）</option></select></label>
-<label>计划学习年限<input type="number" id="years" min="0" max="20" step="0.5" value="1" required></label>
-<label>每年学费<input type="number" id="tuition" min="0" value="0" required></label>
-<label>每月住宿费<input type="number" id="housing" min="0" value="0" required></label>
-<label>每月生活费<input type="number" id="living" min="0" value="0" required></label>
-<label>考试与申请材料总费用<input type="number" id="application" min="0" value="0" required></label>
-<label>交通、签证、保险等总费用<input type="number" id="travel" min="0" value="0" required></label>
-<label>应急预留比例（%）<input type="number" id="reserve" min="0" max="100" value="10" required></label>
-</div><button class="button primary full-width" type="submit">计算预算 →</button><div class="result-panel" id="budgetResult" hidden></div></form><p class="privacy-note">仅作个人预算估算。结果不是学校报价，也不包含未填写的费用。</p></div>
+<section class="page-hero"><div class="breadcrumb"><a href="../index.html">首页</a> / <a href="index.html">实用工具</a> / 预算计算器</div><p class="eyebrow">EDUCATION BUDGET</p><h1>教育预算计算器</h1><p>填入你自己的估算值，统一计算项目成本。请使用同一币种输入；换汇汇率和银行费用需另行核实。</p></section>
+<main class="form-shell"><form class="tool-form" id="budgetForm"><div class="form-grid">
+<label>币种<select id="currency"><option value="CNY">人民币（¥）</option><option value="EUR">欧元（€）</option><option value="GBP">英镑（£）</option><option value="USD">美元（$）</option></select></label>
+<label>计划学习年限<input type="number" id="years" min="0.5" max="20" step="0.5" value="1" required></label>
+<label>每年学费<input type="number" id="tuition" min="0" max="100000000" step="0.01" value="0" required></label>
+<label>每月住宿费<input type="number" id="housing" min="0" max="10000000" step="0.01" value="0" required></label>
+<label>每月生活费<input type="number" id="living" min="0" max="10000000" step="0.01" value="0" required></label>
+<label>考试与申请材料总费用<input type="number" id="application" min="0" max="10000000" step="0.01" value="0" required></label>
+<label>交通、签证、保险等总费用<input type="number" id="travel" min="0" max="10000000" step="0.01" value="0" required></label>
+<label>应急预留比例（%）<input type="number" id="reserve" min="0" max="100" step="1" value="10" required></label>
+</div><button class="button primary full-width" type="submit">计算预算 →</button><div class="result-panel" id="budgetResult" hidden aria-live="polite"></div></form>
+<p class="privacy-note">仅作个人估算。结果不是学校报价，不自动包含你未填写的费用，也不代表签证资金要求。</p>
+</main>
+<footer><a class="brand" href="../index.html"><span class="brand-mark">路</span><span>升学路线图</span></a><p>独立的公共教育信息项目 · 非官方招生机构</p><div><a href="../README.md">项目说明</a><a href="../sources.html">资料来源</a><a href="../CONTENT-LICENSE.md">内容许可</a></div><small>请在重要决定前核实官方最新信息。</small></footer>
 <script>
-document.getElementById('budgetForm').addEventListener('submit',e=>{e.preventDefault();const v=id=>Number(document.getElementById(id).value)||0;const cur=document.getElementById('currency').value,years=v('years'),tuition=v('tuition')*years,housing=v('housing')*12*years,living=v('living')*12*years,application=v('application'),travel=v('travel'),base=tuition+housing+living+application+travel,reserve=base*v('reserve')/100,total=base+reserve;const fmt=n=>cur+n.toLocaleString('zh-CN',{maximumFractionDigits:2});const r=document.getElementById('budgetResult');r.innerHTML='<h2>预算估算结果</h2><p>学费：<b>'+fmt(tuition)+'</b></p><p>住宿：<b>'+fmt(housing)+'</b></p><p>生活费：<b>'+fmt(living)+'</b></p><p>考试与申请材料：<b>'+fmt(application)+'</b></p><p>交通、签证、保险等：<b>'+fmt(travel)+'</b></p><p>应急预留：<b>'+fmt(reserve)+'</b></p><hr><p style="font-size:18px"><b>预计总预算：'+fmt(total)+'</b></p><p>建议将实际学费、住宿报价、签证资金要求和汇率以目标学校及政府官方信息为准，并准备费用上浮或延迟毕业的预案。</p>';r.hidden=false;});
-</script></body></html>
+const form=document.getElementById('budgetForm');
+const symbols={CNY:'¥',EUR:'€',GBP:'£',USD:'$'};
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ const ids=['years','tuition','housing','living','application','travel','reserve'];
+ const nums={};let valid=true;
+ ids.forEach(id=>{const el=document.getElementById(id);const n=Number(el.value);if(el.value.trim()===''||!Number.isFinite(n)||n<Number(el.min)||n>Number(el.max)){el.setCustomValidity('请输入范围内的有效数字');valid=false;}else{el.setCustomValidity('');nums[id]=n;}});
+ if(!valid){form.reportValidity();return;}
+ const currency=document.getElementById('currency').value,years=nums.years;
+ const items=[
+ ['学费',nums.tuition*years],
+ ['住宿费',nums.housing*12*years],
+ ['生活费',nums.living*12*years],
+ ['考试与申请材料',nums.application],
+ ['交通、签证、保险等',nums.travel]
+ ];
+ const base=items.reduce((sum,item)=>sum+item[1],0),reserve=base*nums.reserve/100,total=base+reserve;
+ const fmt=n=>symbols[currency]+n.toLocaleString('zh-CN',{minimumFractionDigits:0,maximumFractionDigits:2});
+ const result=document.getElementById('budgetResult');result.replaceChildren();
+ const h=document.createElement('h2');h.textContent='预算估算结果';result.append(h);
+ const intro=document.createElement('p');intro.textContent='按 '+years+' 年学习期估算。';result.append(intro);
+ const table=document.createElement('table');table.className='data-table';
+ const tbody=document.createElement('tbody');
+ items.forEach(([name,amount])=>{const tr=document.createElement('tr'),th=document.createElement('th'),td=document.createElement('td');th.textContent=name;td.textContent=fmt(amount);tr.append(th,td);tbody.append(tr);});
+ [['基础费用合计',base],['应急预留（'+nums.reserve+'%）',reserve],['预计总预算',total]].forEach(([name,amount],i)=>{const tr=document.createElement('tr'),th=document.createElement('th'),td=document.createElement('td');th.textContent=name;td.textContent=fmt(amount);if(i===2){th.style.fontSize='15px';td.style.fontSize='18px';td.style.fontWeight='800';}tr.append(th,td);tbody.append(tr);});
+ table.append(tbody);result.append(table);
+ const warning=document.createElement('p');warning.textContent='请再核对是否遗漏押金、教材设备、医疗保险、居留/签证费用、往返交通、汇率波动、学费上涨和延期学习成本。各类费用应按所选币种统一输入。';result.append(warning);
+ const checklist=document.createElement('a');checklist.className='button secondary';checklist.href='checklist.html';checklist.textContent='把费用核对加入申请清单 →';result.append(checklist);
+ result.hidden=false;result.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+</script>
+</body></html>
