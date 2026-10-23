@@ -1,0 +1,7 @@
+record_id,topic,conclusion_or_question,region_or_scope,applicable_year,official_source_name,official_url,source_title_or_clause,published_date,effective_date,last_checked,verification_status,exceptions_and_notes,maintainer
+EDU-001,硕士研究生招生,核对当年报名资格与招生单位要求,中国大陆,填写年份,中国研究生招生信息网,https://yz.chsi.com.cn/,待填写,,,,待核验,需同时核对当年教育部文件及招生单位招生简章,
+EDU-002,高考招生,核对当年招生政策与院校信息,中国大陆及各省市,填写年份,阳光高考信息平台,https://gaokao.chsi.com.cn/,待填写,,,,待核验,省级政策还需查看当地教育行政部门或招生考试机构公告,
+EDU-003,教育政策,核对教育行政部门发布的法规与通知,中国大陆,按文件适用范围,中华人民共和国教育部,https://www.moe.gov.cn/,待填写,,,,待核验,应记录具体文件标题、发布日期和生效日期,
+EDU-004,国境外学历学位认证,核对当前认证规则与适用范围,中国大陆及相关境外学历,填写申请时适用年份,教育部留学服务中心,https://www.cscse.edu.cn/,待填写,,,,待核验,不得将院校录取资格与学历学位认证结果混为一谈,
+EDU-005,海外大学申请资格,核对具体项目对既有学历的要求,目标国家及具体大学,填写入学年份,目标大学官方招生部门,填写目标大学官网招生页面,待填写,,,,待核验,优先获取招生部门书面答复；不同项目规定可能不同,
+EDU-006,地方入学与专升本政策,核对当地报名对象、专业限制和考试安排,填写省市,填写年份,当地教育行政部门或招生考试机构,填写当地政府或教育部门官方链接,待填写,,,,待核验,不可将一个省份或往年规则直接套用于其他地区或年份,
