@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>教育预算计算器｜升学路线图</title><link rel="stylesheet" href="../styles.css"></head><body>
+<header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">路</span><span>升学路线图</span></a><nav><a href="../index.html#knowledge">知识库</a><a href="index.html">实用工具</a><a href="../sources.html">官方资料库</a></nav><a class="github-link" href="../index.html">返回首页 ↗</a></header>
+<section class="page-hero"><div class="breadcrumb"><a href="../index.html">首页</a> / <a href="index.html">实用工具</a> / 预算计算器</div><p class="eyebrow">EDUCATION BUDGET</p><h1>教育预算计算器</h1><p>填入你自己的估算值，统一计算项目成本。金额按同一币种输入；如需换汇，请另行核实汇率和银行费用。</p></section>
+<div class="form-shell"><form class="tool-form" id="budgetForm"><div class="form-grid">
+<label>币种<select id="currency"><option value="¥">人民币（¥）</option><option value="€">欧元（€）</option><option value="£">英镑（£）</option><option value="$">美元（$）</option></select></label>
+<label>计划学习年限<input type="number" id="years" min="0" max="20" step="0.5" value="1" required></label>
+<label>每年学费<input type="number" id="tuition" min="0" value="0" required></label>
+<label>每月住宿费<input type="number" id="housing" min="0" value="0" required></label>
+<label>每月生活费<input type="number" id="living" min="0" value="0" required></label>
+<label>考试与申请材料总费用<input type="number" id="application" min="0" value="0" required></label>
+<label>交通、签证、保险等总费用<input type="number" id="travel" min="0" value="0" required></label>
+<label>应急预留比例（%）<input type="number" id="reserve" min="0" max="100" value="10" required></label>
+</div><button class="button primary full-width" type="submit">计算预算 →</button><div class="result-panel" id="budgetResult" hidden></div></form><p class="privacy-note">仅作个人预算估算。结果不是学校报价，也不包含未填写的费用。</p></div>
+<script>
+document.getElementById('budgetForm').addEventListener('submit',e=>{e.preventDefault();const v=id=>Number(document.getElementById(id).value)||0;const cur=document.getElementById('currency').value,years=v('years'),tuition=v('tuition')*years,housing=v('housing')*12*years,living=v('living')*12*years,application=v('application'),travel=v('travel'),base=tuition+housing+living+application+travel,reserve=base*v('reserve')/100,total=base+reserve;const fmt=n=>cur+n.toLocaleString('zh-CN',{maximumFractionDigits:2});const r=document.getElementById('budgetResult');r.innerHTML='<h2>预算估算结果</h2><p>学费：<b>'+fmt(tuition)+'</b></p><p>住宿：<b>'+fmt(housing)+'</b></p><p>生活费：<b>'+fmt(living)+'</b></p><p>考试与申请材料：<b>'+fmt(application)+'</b></p><p>交通、签证、保险等：<b>'+fmt(travel)+'</b></p><p>应急预留：<b>'+fmt(reserve)+'</b></p><hr><p style="font-size:18px"><b>预计总预算：'+fmt(total)+'</b></p><p>建议将实际学费、住宿报价、签证资金要求和汇率以目标学校及政府官方信息为准，并准备费用上浮或延迟毕业的预案。</p>';r.hidden=false;});
+</script></body></html>
