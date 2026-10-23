@@ -1,13 +1,61 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>升学路线规划器｜升学路线图</title><link rel="stylesheet" href="../styles.css"></head><body>
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="根据个人阶段和目标整理升学下一步。"><title>升学路线规划器｜升学路线图</title><link rel="stylesheet" href="../styles.css"></head>
+<body>
 <header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">路</span><span>升学路线图</span></a><nav><a href="../index.html#knowledge">知识库</a><a href="index.html">实用工具</a><a href="../sources.html">官方资料库</a></nav><a class="github-link" href="../index.html">返回首页 ↗</a></header>
-<section class="page-hero"><div class="breadcrumb"><a href="../index.html">首页</a> / <a href="index.html">实用工具</a> / 路线规划器</div><p class="eyebrow">PATHWAY PLANNER</p><h1>升学路线规划器</h1><p>先梳理目标与限制，再列出需要官方核验的问题。它不会预测录取结果。</p></section>
-<div class="form-shell"><form class="tool-form" id="plannerForm"><div class="form-grid">
+<section class="page-hero"><div class="breadcrumb"><a href="../index.html">首页</a> / <a href="index.html">实用工具</a> / 路线规划器</div><p class="eyebrow">PATHWAY PLANNER</p><h1>升学路线规划器</h1><p>整理个人情况，生成下一步行动建议与待核验事项。工具不会预测录取结果，也不会替代学校的资格审查。</p></section>
+<main class="form-shell"><form class="tool-form" id="plannerForm">
+<div class="form-grid">
 <label>当前阶段<select id="stage" required><option value="">请选择</option><option>学前 / 小学</option><option>初中</option><option>高中 / 中职</option><option>专科</option><option>本科</option><option>硕士</option><option>已工作 / 其他</option></select></label>
-<label>目标<select id="goal" required><option value="">请选择</option><option>继续国内升学</option><option>申请海外学校</option><option>提升学历 / 转专业</option><option>职业技能与就业</option><option>还不确定</option></select></label>
-<label>预算偏好<select id="budget" required><option value="">请选择</option><option>预算有限，优先低成本</option><option>有一定储蓄</option><option>可承担较高教育费用</option><option>暂未确定</option></select></label>
-<label>预计准备时间<select id="time" required><option value="">请选择</option><option>6 个月以内</option><option>6–12 个月</option><option>1–3 年</option><option>3 年以上</option></select></label>
-<label>目标地区（可选）<input id="region" placeholder="例如：所在省份 / 西班牙 / 暂未确定"></label>
-<label>每周可投入时间（小时）<input id="hours" type="number" min="0" max="100" placeholder="例如：5"></label></div><button class="button primary full-width" type="submit">生成路线建议 →</button><div class="result-panel" id="result" hidden></div></form></div>
+<label>主要目标<select id="goal" required><option value="">请选择</option><option>继续国内升学</option><option>申请海外学校</option><option>提升学历 / 转专业</option><option>职业技能与就业</option><option>还不确定</option></select></label>
+<label>预算情况<select id="budget" required><option value="">请选择</option><option>预算有限，优先低成本</option><option>有一定储蓄</option><option>可承担较高教育费用</option><option>暂未确定</option></select></label>
+<label>准备周期<select id="time" required><option value="">请选择</option><option>6 个月以内</option><option>6–12 个月</option><option>1–3 年</option><option>3 年以上</option></select></label>
+<label>目标地区（可选）<input id="region" maxlength="100" placeholder="例如：所在省份 / 西班牙 / 暂未确定"></label>
+<label>每周可投入时间（小时）<input id="hours" type="number" min="0" max="100" step="0.5" placeholder="例如：5"></label>
+</div>
+<button class="button primary full-width" type="submit">生成我的行动路线 →</button>
+<div class="result-panel" id="result" hidden aria-live="polite"></div>
+</form>
+<p class="privacy-note">输入只在当前浏览器页面内处理。请勿在公共设备输入身份证号、账户信息等敏感资料。</p>
+</main>
+<footer><a class="brand" href="../index.html"><span class="brand-mark">路</span><span>升学路线图</span></a><p>独立的公共教育信息项目 · 非官方招生机构</p><div><a href="../README.md">项目说明</a><a href="../sources.html">资料来源</a><a href="../CONTENT-LICENSE.md">内容许可</a></div><small>请在重要决定前核实官方最新信息。</small></footer>
 <script>
-document.getElementById('plannerForm').addEventListener('submit',e=>{e.preventDefault();const stage=document.getElementById('stage').value,goal=document.getElementById('goal').value,budget=document.getElementById('budget').value,time=document.getElementById('time').value,region=document.getElementById('region').value||'待确定',hours=document.getElementById('hours').value||'待确定';let advice='列出至少两条候选路线，比较资格、总时间、总费用、证书和下一阶段出口。';if(goal==='申请海外学校')advice='先向目标学校书面核实现有学历是否符合入学资格，再核对语言成绩、材料认证、申请截止日期、签证与资金要求。不要仅凭中介宣传判断。';if(goal==='继续国内升学')advice='查阅所在地当年教育主管部门、考试机构与目标学校发布的正式招生政策，确认报名资格、考试科目、时间节点和材料要求。';if(goal==='提升学历 / 转专业')advice='先确定目标证书类型和用途，核对招生主体、学习形式、考试要求、费用、学制及后续升学资格。';if(budget.includes('有限'))advice+=' 预算有限时，优先比较公办项目、奖助学金、低成本地区和分阶段计划。';const r=document.getElementById('result');r.innerHTML='<h2>你的初步路线摘要</h2><p><b>当前阶段：</b>'+stage+'　<b>目标：</b>'+goal+'</p><p><b>目标地区：</b>'+region+'　<b>准备周期：</b>'+time+'　<b>每周时间：</b>'+hours+' 小时</p><p>'+advice+'</p><h3>建议下一步</h3><ol><li>记录目标学校/项目与申请年份。</li><li>保存官方招生要求链接，记录核验日期。</li><li>建立费用表与时间线，并准备至少一条备选路线。</li></ol><p><b>提醒：</b>此结果为一般信息整理，不构成录取判断；具体条件需按地区、年份和学校核实。</p>';r.hidden=false;});
-</script></body></html>
+const form=document.getElementById('plannerForm');
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ const val=id=>document.getElementById(id).value.trim();
+ const stage=val('stage'),goal=val('goal'),budget=val('budget'),time=val('time'),region=val('region')||'待确定',hours=val('hours')||'待确定';
+ const steps=[];
+ steps.push('写下目标学历、专业/方向、地区与计划申请年份，避免目标过于笼统。');
+ if(goal==='申请海外学校'){
+  steps.push('先将现有学历、毕业证书类型和成绩单发给目标学校招生部门，书面核实是否满足该具体项目的入学资格。');
+  steps.push('分别核对学校官网的语言要求、材料认证/翻译、申请截止日期、学费、签证与资金要求。');
+ }else if(goal==='继续国内升学'){
+  steps.push('查找所在地教育主管部门、考试机构和目标学校发布的当年招生简章，核实报名资格、考试科目和时间。');
+  steps.push('将报名条件、考试安排、材料清单和费用整理成一张表，并标注官方链接与核验日期。');
+ }else if(goal==='提升学历 / 转专业'){
+  steps.push('先确认目标证书的性质、颁发主体、学习形式和用途，再核对招生资格及后续升学/就业认可范围。');
+  steps.push('向招生单位确认总费用、学制、考核方式、毕业条件，并保存书面答复。');
+ }else if(goal==='职业技能与就业'){
+  steps.push('从目标岗位招聘要求反推需要的技能、作品/证书和实践经历，优先比较低成本的课程与项目。');
+  steps.push('安排每周固定学习与实践时间，建立可展示的作品或项目记录。');
+ }else{
+  steps.push('先列出两到三种候选路线，对比入学资格、总费用、时间成本、证书效力和下一阶段出口。');
+ }
+ if(budget.includes('有限')) steps.push('资金有限时，先算完整周期总成本与应急金，再比较公办项目、奖助学金、低成本地区和分阶段实施方案；避免借高息贷款仓促决定。');
+ else steps.push('把学费、住宿、生活、考试/申请、交通保险和应急金分开估算，并预留费用上涨或计划延迟的空间。');
+ if(time==='6 个月以内') steps.push('把准备工作按周拆分，先完成资格核验和截止日期确认；若时间不足，及时比较下一申请批次。');
+ else if(time==='1–3 年'||time==='3 年以上') steps.push('按季度设置里程碑：资格核验、语言/考试准备、资金积累、材料准备和备选路线。');
+ else steps.push('制作月度时间表，优先处理耗时最长或存在不确定性的事项。');
+ steps.push('为每项重要结论记录官方来源链接、页面标题、适用地区/年份、核验日期和联系人。');
+ const result=document.getElementById('result');result.replaceChildren();
+ const h=document.createElement('h2');h.textContent='你的初步行动路线';result.append(h);
+ const summary=document.createElement('p');summary.textContent='当前阶段：'+stage+'；目标：'+goal+'；地区：'+region+'；准备周期：'+time+'；每周可投入：'+hours+' 小时。';result.append(summary);
+ const heading=document.createElement('h3');heading.textContent='建议按顺序完成';result.append(heading);
+ const ol=document.createElement('ol');steps.forEach(s=>{const li=document.createElement('li');li.textContent=s;ol.append(li)});result.append(ol);
+ const note=document.createElement('p');note.textContent='下一步：打开申请清单，把上述任务变成可跟踪事项。所有资格和政策结论都需由对应官方机构确认。';result.append(note);
+ const link=document.createElement('a');link.className='button secondary';link.href='checklist.html';link.textContent='打开申请清单 →';result.append(link);
+ result.hidden=false;result.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+</script>
+</body></html>
